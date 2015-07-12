@@ -6,6 +6,8 @@ import com.coding.duplicates.criteria.MissingMiddleNameCriteria;
 import com.coding.duplicates.criteria.MisspelledLastNameCriteria;
 import com.coding.duplicates.criteria.OrderVariationCriteria;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -18,12 +20,19 @@ public class DuplicateNamesResolverService {
                                                                        new MissingMiddleNameCriteria(),
                                                                        new MisspelledLastNameCriteria());
 
-    public void groupDuplicateNameRecords(List<List<String>> namesList) {
+    public List<List<String>> groupDuplicateNameRecords(List<String> inputNameList) {
+
+        //Create a list of lists - Sub list contains the duplicate records (initially every sub list has one name)
+        List<List<String>> namesList = new ArrayList<List<String>>();
+        for(String name: inputNameList){
+            namesList.add(new ArrayList<String>(Arrays.asList(name)));
+        }
         
         //iterate each element from list and match for duplicates with rest of the other elements (only in forward direction)
         for (int i = 0; i < namesList.size(); i++) {
             matchForDuplicates(namesList, i);
         }
+        return namesList;
     }
 
     private void matchForDuplicates(List<List<String>> namesList, int i) {

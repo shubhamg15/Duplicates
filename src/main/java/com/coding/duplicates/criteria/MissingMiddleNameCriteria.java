@@ -5,17 +5,17 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class MissingMiddleNameCriteria implements DuplicateCriteria{
+public class MissingMiddleNameCriteria implements DuplicateCriteria {
 
     @Override
     public boolean isDuplicate(String nameOne, String nameTwo) {
-        
+
         List<String> splitNameOne = new LinkedList<String>(asList(nameOne.split(" ")));
         List<String> splitNameTwo = new LinkedList<String>(asList(nameTwo.split(" ")));
 
-        if(splitNameOne.size() == 3 && splitNameTwo.size() == 2){
+        if (splitNameOne.size() == 3 && splitNameTwo.size() == 2) {
             return compareForDuplicate(splitNameOne, splitNameTwo);
-        } else if(splitNameOne.size() == 2 && splitNameTwo.size() == 3){
+        } else if (splitNameOne.size() == 2 && splitNameTwo.size() == 3) {
             return compareForDuplicate(splitNameTwo, splitNameOne);
         }
         return false;

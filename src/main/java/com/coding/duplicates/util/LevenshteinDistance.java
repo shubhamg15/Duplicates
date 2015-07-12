@@ -1,7 +1,7 @@
 package com.coding.duplicates.util;
 
 public class LevenshteinDistance {
-    
+
     private static int minimum(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
     }
